@@ -14,12 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_n_mr1.mk)
 
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/motorola/sanders/full_sanders.mk)
 
-# Inherit some common SacredOS stuff.
-$(call inherit-product, vendor/sacred/common.mk)
+# Inherit some common Liquid stuff.
+$(call inherit-product, vendor/liquid/common_full_phone.mk)
 
 # Boot animation
 TARGET_SCREEN_WIDTH := 1080
@@ -27,11 +31,13 @@ TARGET_SCREEN_HEIGHT := 1920
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := sanders
-PRODUCT_NAME := sacred_sanders
+PRODUCT_NAME := liquid_sanders
 PRODUCT_BRAND := motorola
 PRODUCT_MANUFACTURER := motorola
+PRODUCT_MODEL := Moto G5S Plus
 
-PRODUCT_SYSTEM_PROPERTY_BLACKLIST := ro.product.model
+PRODUCT_BUILD_PROP_OVERRIDES += 
+TARGET_DEVICE=liquid_sander PRODUCT_NAME="Moto G5s Plus"
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME="Moto G5S Plus"
+# for specific
+$(call inherit-product, vendor/motorola/sanders/sanders-vendor.mk)
